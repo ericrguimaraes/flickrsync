@@ -1,19 +1,13 @@
 <?php
-    /* BY ERIC: based on phpflickr/auth.php
-     * 
-     *  Last updated with phpFlickr 2.3.2
+    /* Last updated with phpFlickr 2.3.2
      *
      * Edit these variables to reflect the values you need. $default_redirect 
      * and $permissions are only important if you are linking here instead of
      * using phpFlickr::auth() from another page or if you set the remember_uri
      * argument to false.
      */
-
-require_once('./sensitive_data_wrapper.php');
-require_once('./lib/phpflickr/phpFlickr.php');
-
-    $api_key                 = FLICKR_API_KEY;
-    $api_secret              = FLICKR_API_SECRET;
+    $api_key                 = "[your api key]";
+    $api_secret              = "[your api secret]";
     $default_redirect        = "/";
     $permissions             = "read";
     $path_to_phpFlickr_class = "./";

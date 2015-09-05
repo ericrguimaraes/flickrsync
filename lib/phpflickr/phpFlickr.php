@@ -19,7 +19,9 @@
  */
 if ( !class_exists('phpFlickr') ) {
 	if (session_id() == "") {
+flickrsync_log('iniciando sessao');
 		@session_start();
+flickrsync_vardump($_SESSION);		
 	}
 
 	class phpFlickr {
@@ -244,6 +246,7 @@ if ( !class_exists('phpFlickr') ) {
 				fputs ($fp,"Content-length: ".strlen($data)."\n");
 				fputs ($fp,"Connection: close\r\n\r\n");
 				fputs ($fp,$data . "\n\n");
+flickrsync_vardump($data);					
 				$response = "";
 				while(!feof($fp)) {
 					$response .= fgets($fp, 1024);
@@ -266,6 +269,7 @@ if ( !class_exists('phpFlickr') ) {
 					$response = trim(strstr($response, "\r\n\r\n"));
 				}
 			}
+flickrsync_vardump($response);
 			return $response;
 		}
 
@@ -604,6 +608,7 @@ if ( !class_exists('phpFlickr') ) {
 				if ($this->service == "23") {
 					header("Location: http://www.23hq.com/services/auth/?api_key=" . $this->api_key . "&perms=" . $perms . "&api_sig=". $api_sig);
 				} else {
+flickrsync_log('header auth');					
 					header("Location: https://www.flickr.com/services/auth/?api_key=" . $this->api_key . "&perms=" . $perms . "&api_sig=". $api_sig);
 				}
 				exit;
@@ -665,6 +670,7 @@ if ( !class_exists('phpFlickr') ) {
 		/* Authentication methods */
 		function auth_checkToken () {
 			/* https://www.flickr.com/services/api/flickr.auth.checkToken.html */
+flickrsync_log('auth_checkToken');
 			$this->request('flickr.auth.checkToken');
 			return $this->parsed_response ? $this->parsed_response['auth'] : false;
 		}
